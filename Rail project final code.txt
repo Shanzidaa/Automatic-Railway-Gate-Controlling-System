@@ -1,0 +1,50 @@
+#include <Servo.h>
+
+Servo gate1_servo;
+Servo gate2_servo;
+
+int sensor1_pin = 4; // IR sensor 1 pin
+int sensor2_pin = 5; // IR sensor 2 pin
+int gate1_servo_pin = 6; // Gate 1 servo pin
+int gate2_servo_pin = 7; // Gate 2 servo pin
+
+int val1; // Value from IR sensor 1
+int val2; // Value from IR sensor 2
+
+void setup() {
+  pinMode(sensor1_pin, INPUT);
+  pinMode(sensor2_pin, INPUT);
+  
+  gate1_servo.attach(gate1_servo_pin);
+  gate2_servo.attach(gate2_servo_pin);
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+  val1 = digitalRead(sensor1_pin);
+  val2 = digitalRead(sensor2_pin);
+  
+  Serial.print("IR Sensor 1: ");
+  Serial.print(val1);
+  Serial.print("  IR Sensor 2: ");
+  Serial.println(val2);
+  
+  if (val1 == 0 && val2 == 0) { // If both sensors detect an obstacle
+    closeGates(); // Close the gates
+    delay(1700); // Wait for 1.8 seconds
+  }
+  else { // If any sensor doesn't detect an obstacle
+    openGates(); // Open the gates
+  }
+}
+
+void closeGates() {
+  gate1_servo.write(0); // Close gate 1
+  gate2_servo.write(0); // Close gate 2
+}
+
+void openGates() {
+  gate1_servo.write(180); // Open gate 1
+  gate2_servo.write(180); // Open gate 2
+}
