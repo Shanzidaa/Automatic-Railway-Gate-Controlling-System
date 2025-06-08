@@ -1,5 +1,4 @@
 # Automatic-Railway-Gate-Controlling-System 
-## Introduction
 
 The **Automatic Railway Gate Controlling System** is an embedded automation project designed to enhance the safety and efficiency of railway level crossings. Traditionally, railway gates are operated manually by gatekeepers, which introduces human error, delays, and the risk of accidents due to miscommunication or negligence.
 
